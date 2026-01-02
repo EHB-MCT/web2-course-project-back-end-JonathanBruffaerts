@@ -30,8 +30,6 @@ async function run() {
     database = client.db('courseproject-web2');
     compounds = database.collection('compounds');
     console.log('Connected to MongoDB');
-    // Add your routes here, e.g.:
-    // app.get('/compounds', async (req, res) => { ... });
   } catch (error) {
     console.error('MongoDB connection error:', error);
     process.exit(1);
@@ -57,6 +55,35 @@ app.get('/compounds', async (req, res) => {
 app.post('/compounds', async (req, res) => {
   try {
     const newCompound = req.body;
+
+    // Easter Egg: Restrict Compound V
+    if (data.name?.toLowerCase() === 'compound v') {
+      return res.status(418).json({ 
+        error: "Vought Protocol 7", 
+        message: "Injecting Compound V is restricted to licensed superheroes only." 
+      });
+    }
+    
+    // Define required fields
+    const requiredFields = [
+      'compoundId', 'name', 'category', 'anabolicRatio', 'androgenicRatio',
+      'toxicityLevel', 'mechanismOfAction', 'halfLife', 'administrationRoute',
+      'chemicalStructure', 'biomarkers', 'sideEffects', 'studyIds'
+    ];
+    
+    // Check for missing fields
+    const missingFields = requiredFields.filter(field => !(field in newCompound));
+    if (missingFields.length > 0) {
+      return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
+    }
+    
+    // Check if compound already exists
+    const existingCompound = await compounds.findOne({ compoundId: newCompound.compoundId });
+    if (existingCompound) {
+      return res.status(409).json({ error: 'Compound with this compoundId already exists' });
+    }
+    
+    // Insert the new compound
     const result = await compounds.insertOne(newCompound);
     res.status(201).json(result);
   } catch (error) {
@@ -67,7 +94,7 @@ app.post('/compounds', async (req, res) => {
 
 app.delete('/compounds/:id', async (req, res) => {
   try {
-    const result = await compounds.deleteOne({ _id: new ObjectId(req.params.id) });
+    const result = await compounds.deleteOne({ compoundId: req.params.id });  // Use compoundId instead of _id
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'No compound found to delete' });
     }
@@ -79,26 +106,21 @@ app.delete('/compounds/:id', async (req, res) => {
 
 app.put('/compound/:id', async (req, res) => {
   try {
-    const id = new ObjectId(req.params.id);  // Convert string to ObjectId
     const updatedCompound = req.body;
-    const result = await compounds.updateOne({ _id: id }, { $set: updatedCompound });
+    const result = await compounds.updateOne({ compoundId: req.params.id }, { $set: updatedCompound });  // Use compoundId instead of _id
     if (result.matchedCount === 0) {
       return res.status(404).json({ error: 'Compound not found' });
     }
     res.json(result);
   } catch (error) {
     console.error('Error updating compound:', error);
-    if (error.name === 'BSONTypeError') {
-      res.status(400).json({ error: 'Invalid ID format' });
-    } else {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.get('/compounds/:id', async (req, res) => {
+app.get('/compound', async (req, res) => {
   try {
-    const query = { _id: new ObjectId(req.params.id) };
+    const query = { compoundId: req.query.id };
     const compound = await compounds.findOne(query);
     
     if (!compound) {
