@@ -1,0 +1,30 @@
+{
+  "collection": "compounds",
+  "description": "A database of performance-enhancing compounds and their physiological impacts.",
+  "fields": {
+    "compoundId": "String (Unique ID for URL slugs)",
+    "name": "String",
+    "category": "Array of Strings",
+    "anabolicRatio": "Number (Double)",
+    "androgenicRatio": "Number (Double)",
+    "toxicityLevel": "Number (Integer 1-5)",
+    "mechanismOfAction": "String",
+    "halfLife": "Number (Hours)",
+    "administrationRoute": "String (Oral/Injectable)",
+    "chemicalStructure": "String (SMILES notation)",
+    "biomarkers": {
+      "testosteroneImpact": "Number",
+      "estrogenImpact": "Number",
+      "lipidImpact": {
+        "HDL": "Number",
+        "LDL": "Number"
+      },
+      "liverEnzymes": {
+        "ALT": "Number",
+        "AST": "Number"
+      }
+    },
+    "sideEffects": "Array of Strings",
+    "studyIds": "Array of Strings"
+  }
+}

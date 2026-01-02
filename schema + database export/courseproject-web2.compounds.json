@@ -1,0 +1,660 @@
+[{
+  "_id": {
+    "$oid": "69408d90df607a576e5b1c78"
+  },
+  "compoundId": "test-cypionate",
+  "name": "Testosterone Cypionate",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Long-Acting"
+  ],
+  "anabolicRatio": 1,
+  "androgenicRatio": 1,
+  "toxicityLevel": 2,
+  "mechanismOfAction": "Androgen receptor agonist (Testosterone prodrug)",
+  "halfLife": 8,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "CCC(=O)OC(C1C(CCC2)C2C3=CC(=O)CCC3)C1C(C)C4CCC5(C4)CCCC5",
+  "biomarkers": {
+    "testosteroneImpact": 200,
+    "estrogenImpact": 40,
+    "lipidImpact": {
+      "HDL": -15,
+      "LDL": 20
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Acne",
+    "Hair Loss",
+    "Gynecomastia",
+    "Water Retention"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408db6df607a576e5b2575"
+  },
+  "compoundId": "test-enanthate",
+  "name": "Testosterone Enanthate",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Long-Acting"
+  ],
+  "anabolicRatio": 1,
+  "androgenicRatio": 1,
+  "toxicityLevel": 2,
+  "mechanismOfAction": "Androgen receptor agonist (Testosterone prodrug)",
+  "halfLife": 4.5,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "CCCCCCC(=O)O[C@H]1CC[C@@H]2[C@@]1(CCC3=CC(=O)CC[C@]23C)C",
+  "biomarkers": {
+    "testosteroneImpact": 200,
+    "estrogenImpact": 50,
+    "lipidImpact": {
+      "HDL": -15,
+      "LDL": 25
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Acne",
+    "Hair Loss",
+    "Gynecomastia",
+    "Injection Site Pain"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408ddddf607a576e5b2576"
+  },
+  "compoundId": "test-propionate",
+  "name": "Testosterone Propionate (Test Prop)",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Short-Acting"
+  ],
+  "anabolicRatio": 1,
+  "androgenicRatio": 1,
+  "toxicityLevel": 2,
+  "mechanismOfAction": "Androgen receptor agonist (Testosterone prodrug)",
+  "halfLife": 1.7,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "CCC(=O)O[C@H]1CC[C@@H]2[C@@]1(CCC3=CC(=O)CC[C@]23C)C",
+  "biomarkers": {
+    "testosteroneImpact": 150,
+    "estrogenImpact": 40,
+    "lipidImpact": {
+      "HDL": -10,
+      "LDL": 15
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Acne",
+    "Frequent Injections",
+    "Injection Site Pain"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408df7df607a576e5b2577"
+  },
+  "compoundId": "nandrolone-decanoate",
+  "name": "Nandrolone Decanoate (Deca-Durabolin)",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Long-Acting"
+  ],
+  "anabolicRatio": 10,
+  "androgenicRatio": 3,
+  "toxicityLevel": 1,
+  "mechanismOfAction": "Androgen receptor agonist",
+  "halfLife": 6,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "CCCCCCCCCC(=O)O[C@H]1CC[C@@H]2[C@@]1(CCC3=CC(=O)CCC[C@]23C)C",
+  "biomarkers": {
+    "testosteroneImpact": -80,
+    "estrogenImpact": 5,
+    "lipidImpact": {
+      "HDL": -30,
+      "LDL": 10
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Testosterone Shutdown",
+    "Erectile Dysfunction",
+    "High Progestin Activity"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408e14df607a576e5b2578"
+  },
+  "compoundId": "nandrolone-pp",
+  "name": "Nandrolone Phenylpropionate (Durabalin)",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Short-Acting"
+  ],
+  "anabolicRatio": 10,
+  "androgenicRatio": 3,
+  "toxicityLevel": 1,
+  "mechanismOfAction": "Androgen receptor agonist",
+  "halfLife": 2.7,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "O=C1C=C[C@H]2[C@@H]3CCC4=CC(=O)CC[C@@]4(C)[C@H]3CC[C@@]12C",
+  "biomarkers": {
+    "testosteroneImpact": -70,
+    "estrogenImpact": 5,
+    "lipidImpact": {
+      "HDL": -25,
+      "LDL": 10
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Testosterone Shutdown",
+    "Erectile Dysfunction",
+    "More frequent injections"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408e2fdf607a576e5b257c"
+  },
+  "compoundId": "stanozolol",
+  "name": "Stanozolol (Winstrol)",
+  "category": [
+    "Steroid",
+    "Oral",
+    "Injectable",
+    "DHT-Derivative"
+  ],
+  "anabolicRatio": 3,
+  "androgenicRatio": 1,
+  "toxicityLevel": 8,
+  "mechanismOfAction": "Androgen receptor agonist (High AR affinity)",
+  "halfLife": 9,
+  "administrationRoute": "Oral/Injectable (Aqueous)",
+  "chemicalStructure": "CC12CCC3C4CC=C(C)C4(C)CCC3C1(C)CCC2",
+  "biomarkers": {
+    "testosteroneImpact": -80,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -50,
+      "LDL": 60
+    },
+    "liverEnzymes": {
+      "ALT": 30,
+      "AST": 25
+    }
+  },
+  "sideEffects": [
+    "Severe Joint Pain",
+    "Severe Cholesterol Impact",
+    "High Hepatotoxicity"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408e4fdf607a576e5b257d"
+  },
+  "compoundId": "oxandrolone",
+  "name": "Oxandrolone (Anavar)",
+  "category": [
+    "Steroid",
+    "Oral",
+    "DHT-Derivative"
+  ],
+  "anabolicRatio": 13,
+  "androgenicRatio": 3,
+  "toxicityLevel": 5,
+  "mechanismOfAction": "Androgen receptor agonist",
+  "halfLife": 9.4,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CC12CCC3C4CC=C(C)C4(C)CCC3C1(C)CCC2",
+  "biomarkers": {
+    "testosteroneImpact": -40,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -30,
+      "LDL": 40
+    },
+    "liverEnzymes": {
+      "ALT": 20,
+      "AST": 15
+    }
+  },
+  "sideEffects": [
+    "Moderate Hepatotoxicity",
+    "Cholesterol Impact",
+    "Mild Suppression"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408e82df607a576e5b257e"
+  },
+  "compoundId": "methandrostenolone",
+  "name": "Methandrostenolone (Dianabol/D-bol)",
+  "category": [
+    "Steroid",
+    "Oral"
+  ],
+  "anabolicRatio": 8,
+  "androgenicRatio": 1,
+  "toxicityLevel": 9,
+  "mechanismOfAction": "Androgen receptor agonist",
+  "halfLife": 4.5,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CC12CCC3C4CC=C(C)C4(C)CCC3C1(C)CCC2",
+  "biomarkers": {
+    "testosteroneImpact": -85,
+    "estrogenImpact": 70,
+    "lipidImpact": {
+      "HDL": -40,
+      "LDL": 50
+    },
+    "liverEnzymes": {
+      "ALT": 50,
+      "AST": 40
+    }
+  },
+  "sideEffects": [
+    "Extreme Hepatotoxicity",
+    "High Estrogen Conversion",
+    "Water Retention"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408e97df607a576e5b257f"
+  },
+  "compoundId": "oxymetholone",
+  "name": "Oxymetholone (Anadrol)",
+  "category": [
+    "Steroid",
+    "Oral",
+    "DHT-Derivative"
+  ],
+  "anabolicRatio": 9,
+  "androgenicRatio": 2,
+  "toxicityLevel": 10,
+  "mechanismOfAction": "Androgen receptor agonist",
+  "halfLife": 8,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CC12CCC3C4CC=C(C)C4(C)CCC3C1(C)CCC2",
+  "biomarkers": {
+    "testosteroneImpact": -95,
+    "estrogenImpact": 80,
+    "lipidImpact": {
+      "HDL": -60,
+      "LDL": 70
+    },
+    "liverEnzymes": {
+      "ALT": 70,
+      "AST": 60
+    }
+  },
+  "sideEffects": [
+    "Highest Hepatotoxicity Risk",
+    "Severe Water Retention",
+    "Headache"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408ed4df607a576e5b2588"
+  },
+  "compoundId": "trenbolone-acetate",
+  "name": "Trenbolone (Tren)",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Progestin"
+  ],
+  "anabolicRatio": 5,
+  "androgenicRatio": 5,
+  "toxicityLevel": 6,
+  "mechanismOfAction": "Androgen receptor agonist and Progesterone receptor agonist",
+  "halfLife": 3,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "CC12CCC3C4CC=C(C)C4(C)CCC3C1(C)CCC2",
+  "biomarkers": {
+    "testosteroneImpact": -100,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -70,
+      "LDL": 80
+    },
+    "liverEnzymes": {
+      "ALT": 5,
+      "AST": 5
+    }
+  },
+  "sideEffects": [
+    "Severe Cholesterol Impact",
+    "High Progestin Activity",
+    "\"Tren Cough\"",
+    "Insomnia"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408f1bdf607a576e5b2589"
+  },
+  "compoundId": "boldenone-undecylenate",
+  "name": "Boldenone Undecylenate (EQ)",
+  "category": [
+    "Steroid",
+    "Injectable",
+    "Long-Acting"
+  ],
+  "anabolicRatio": 1.5,
+  "androgenicRatio": 0.5,
+  "toxicityLevel": 1,
+  "mechanismOfAction": "Androgen receptor agonist",
+  "halfLife": 14,
+  "administrationRoute": "Injectable",
+  "chemicalStructure": "CCCCCCCCCCC(=O)O[C@H]1CC[C@@H]2[C@@]1(CCC3=CC(=O)CC[C@]23C)C",
+  "biomarkers": {
+    "testosteroneImpact": -60,
+    "estrogenImpact": 10,
+    "lipidImpact": {
+      "HDL": -10,
+      "LDL": 10
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Increased Appetite",
+    "Acne",
+    "Mild Estrogen Conversion"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408f40df607a576e5b258a"
+  },
+  "compoundId": "mk-2866",
+  "name": "Ostarine (MK-2866)",
+  "category": [
+    "SARM",
+    "Oral"
+  ],
+  "anabolicRatio": 3.1,
+  "androgenicRatio": 0.4,
+  "toxicityLevel": 1,
+  "mechanismOfAction": "Selective androgen receptor modulator",
+  "halfLife": 24,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CC(C)(O)C(=O)NC1=C(C#N)C=CC(=C1)C(F)(F)F",
+  "biomarkers": {
+    "testosteroneImpact": -42.6,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -12.4,
+      "LDL": 10.8
+    },
+    "liverEnzymes": {
+      "ALT": 5.2,
+      "AST": 3.1
+    }
+  },
+  "sideEffects": [
+    "Mild Testosterone Suppression",
+    "Mild Liver Enzyme Elevation"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408f72df607a576e5b2590"
+  },
+  "compoundId": "lgd-4033",
+  "name": "Ligandrol (LGD-4033)",
+  "category": [
+    "SARM",
+    "Oral"
+  ],
+  "anabolicRatio": 10,
+  "androgenicRatio": 1,
+  "toxicityLevel": 1,
+  "mechanismOfAction": "Selective androgen receptor modulator",
+  "halfLife": 30,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CC(C)(O)C(=O)NC1=C(C#N)C=CC(=C1)C(F)(F)F",
+  "biomarkers": {
+    "testosteroneImpact": -60,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -30,
+      "LDL": 15
+    },
+    "liverEnzymes": {
+      "ALT": 8,
+      "AST": 5
+    }
+  },
+  "sideEffects": [
+    "Dose-Dependent Suppression",
+    "Significant HDL Suppression"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69408f8fdf607a576e5b2591"
+  },
+  "compoundId": "rad-140",
+  "name": "Testolone (RAD-140)",
+  "category": [
+    "SARM",
+    "Oral"
+  ],
+  "anabolicRatio": 20,
+  "androgenicRatio": 1,
+  "toxicityLevel": 4,
+  "mechanismOfAction": "Selective androgen receptor modulator",
+  "halfLife": 60,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CC(C)(O)C(=O)NC1=C(C#N)C=CC(=C1)C(F)(F)F",
+  "biomarkers": {
+    "testosteroneImpact": -70,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -40,
+      "LDL": 20
+    },
+    "liverEnzymes": {
+      "ALT": 15,
+      "AST": 10
+    }
+  },
+  "sideEffects": [
+    "High Suppression",
+    "Increased Aggression",
+    "Higher Liver Stress"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69409168df607a576e5b7975"
+  },
+  "compoundId": "yk-11",
+  "name": "YK-11",
+  "category": [
+    "SARM",
+    "Myostatin Inhibitor",
+    "Oral"
+  ],
+  "anabolicRatio": 15,
+  "androgenicRatio": 2,
+  "toxicityLevel": 5,
+  "mechanismOfAction": "Partial androgen receptor agonist and Follistatin/Myostatin inhibitor",
+  "halfLife": 6,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CN1C2=C(C=CC=C2)C3(CCN(C)CC3)C1=O",
+  "biomarkers": {
+    "testosteroneImpact": -50,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": -30,
+      "LDL": 10
+    },
+    "liverEnzymes": {
+      "ALT": 25,
+      "AST": 20
+    }
+  },
+  "sideEffects": [
+    "Potential High Hepatotoxicity",
+    "Unknown Long-Term Effects"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "694091e1df607a576e5c2204"
+  },
+  "compoundId": "mk-677",
+  "name": "Ibutamoren (MK-677)",
+  "category": [
+    "Growth Hormone Secretagogue",
+    "Oral"
+  ],
+  "anabolicRatio": 0,
+  "androgenicRatio": 0,
+  "toxicityLevel": 0,
+  "mechanismOfAction": "Ghrelin receptor agonist",
+  "halfLife": 24,
+  "administrationRoute": "Oral",
+  "chemicalStructure": "CS(=O)(=O)N1CCC(C3=CC=CC=C3C4=CN=CC=C4)(CC1)C(=O)N[C@@H](COC(=O)OC)C(C)(C)N",
+  "biomarkers": {
+    "testosteroneImpact": 0,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": 0,
+      "LDL": 0
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Increased Appetite",
+    "Lethargy",
+    "Temporary Water Retention"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "694091f8df607a576e5c44a1"
+  },
+  "compoundId": "hgh",
+  "name": "Human Growth Hormone (HGH)",
+  "category": [
+    "Peptide Hormone",
+    "Injectable"
+  ],
+  "anabolicRatio": 0,
+  "androgenicRatio": 0,
+  "toxicityLevel": 0,
+  "mechanismOfAction": "Growth hormone receptor agonist (stimulates IGF-1 production)",
+  "halfLife": 0.3,
+  "administrationRoute": "Injectable (Subcutaneous)",
+  "chemicalStructure": "FVNQHLGSHRIVK-22:FVNQHLGSHRIVK-23:QGHLGSHRIVK-24:QGHLGSHRIVK-25:VLQLRSHSLGES-26:VLQLRSHSLGES",
+  "biomarkers": {
+    "testosteroneImpact": 0,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": 0,
+      "LDL": 0
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Nerve Pain",
+    "Joint Pain",
+    "Carpal Tunnel Syndrome"
+  ],
+  "studyIds": []
+},
+{
+  "_id": {
+    "$oid": "69409232df607a576e5c83ed"
+  },
+  "compoundId": "igf-1",
+  "name": "Insulin-like Growth Factor 1 (IGF-1)",
+  "category": [
+    "Peptide Hormone",
+    "Injectable"
+  ],
+  "anabolicRatio": 0,
+  "androgenicRatio": 0,
+  "toxicityLevel": 0,
+  "mechanismOfAction": "IGF-1 receptor agonist",
+  "halfLife": 12,
+  "administrationRoute": "Injectable (Subcutaneous/Intramuscular)",
+  "chemicalStructure": "GPETLCGAELVDALQFVCGDRGFYFNKPTGYGSSSRRAPQT",
+  "biomarkers": {
+    "testosteroneImpact": 0,
+    "estrogenImpact": 0,
+    "lipidImpact": {
+      "HDL": 0,
+      "LDL": 0
+    },
+    "liverEnzymes": {
+      "ALT": 0,
+      "AST": 0
+    }
+  },
+  "sideEffects": [
+    "Hypoglycemia",
+    "Joint Pain",
+    "Potential Organ Growth"
+  ],
+  "studyIds": []
+}]
