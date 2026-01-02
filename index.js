@@ -3,9 +3,10 @@
  * Parts used: Implementation of Post-route logic for mongodb
  */
 
+
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const credentials = require('./credentials.js');
@@ -16,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB setup
-const uri = `mongodb+srv://${credentials.username}:${credentials.password}@cluster0.xdx4ahi.mongodb.net/?appName=Cluster0`;
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
