@@ -1,22 +1,33 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=22059164)
-# Your project name ✨
-A short description of your project. Aim for 2-3 lines. \
+💊 Compound Research API
+A specialized REST API built with Express and MongoDB Atlas for cataloging performance-enhancing compounds. It provides full CRUD functionality with built-in data validation for research integrity and physiological biomarkers.
 
-Website url: [website.be](website.be) (optional)
+Up & running 🏃‍➡️
+Clone the repository:
 
-If you want to add more sections, please do so after the existing ones (avoid burying your sources under a lot of text!).
+git clone [your-repo-link]
+Install dependencies:
 
-## Up & running (optional) 🏃‍➡️
-This should contain step by step instructions to run your project (delete this section if it's not relevant). \
-Also include login credentials or other vital information if needed.
+npm install
 
-## Sources 🗃️
-List **ALL your used sources** here:
-- Used a tutorial or example code? Place a link to them here. (youtube, website, github, ...) and **list the files in which they were used**.
-- Used ChatGPT? Generate a ChatGPT share link: options (three dots) > share and **list the files in which it was used**. This will not work if you have uploaded images in your prompt. In that case, add screenshots instead.
+Environment Setup: Create a .env file in the root directory and add your MongoDB connection string:
 
-It's not enough to only list the sources here, also add the sources to the top of the files in which you used them and indicate the specific parts of the code which are not your own (by writing comments and refering to the correct source(s)). \
-IF you use a source as the base/start for a file, then first place the source in the file and **COMMIT it IMMEDIATELY, BEFORE** adding your own code or modifying it. \
-**ALWAYS** use concise BUT CLEAR commit messages!
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0...
+PORT=3000
 
-Have a look at the example repository: https://github.com/EHB-MCT/example-readme
+Start the server:
+npm start
+The server will run on http://localhost:3000.
+
+Project Files 📁
+server.js: Main entry point and Express route definitions.
+
+models/Compound.js: Logic for data validation and structure.
+
+schema.json: Technical definition of the database structure.
+
+compounds_export.json: Sample database export for review.
+
+Sources 🗃️
+Mike Derycke - Coding along: Boardgame REST API (Part 2): [YouTube Link.](https://www.youtube.com/watch?v=3Ykr6dZjXhE&list=PLGsnrfn8XzXii2J5-Jpqufypu6upxcSGx&index=25)
+
+Used for: Implementation of Post-route logic for mongodb and express
