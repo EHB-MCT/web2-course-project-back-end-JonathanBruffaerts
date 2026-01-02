@@ -1,3 +1,8 @@
+/**
+ * Source: Mike Derycke (Boardgame REST API) - https://www.youtube.com/watch?v=3Ykr6dZjXhE
+ * Parts used: Implementation of Post-route logic for mongodb
+ */
+
 const express = require('express');
 const app = express();
 const port = 3000;
