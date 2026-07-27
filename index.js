@@ -157,8 +157,12 @@ app.post('/compounds', async (req, res) => {
     // Check for missing fields
     const missingFields = requiredFields.filter(field => !(field in newCompound));
     if (missingFields.length > 0) {
-      return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
+       return res.status(400).json({
+          message: 'Missing required fields',
+           missingFields
+     });
     }
+
     
     // Validate data types
     if (typeof newCompound.compoundId !== "string") {
@@ -229,41 +233,87 @@ app.post('/compounds', async (req, res) => {
     // Check if compound already exists
     const existingCompound = await compounds.findOne({ compoundId: newCompound.compoundId });
     if (existingCompound) {
-      return res.status(409).json({ error: 'Compound with this compoundId already exists' });
+     return res.status(409).json({
+        message: 'Compound with this compoundId already exists'
+      });
     }
     
     // Insert the new compound
     const result = await compounds.insertOne(newCompound);
-    res.status(201).json(result);
+    res.status(201).json({
+     message: 'Compound created successfully',
+      data: {
+    insertedId: result.insertedId,
+    compound: newCompound
+  }
+  });
   } catch (error) {
     console.error('Error adding compound:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+     res.status(500).json({
+    message: 'Internal Server Error'
+  });
   }
 });
 
 app.delete('/compounds/:id', async (req, res) => {
   try {
-    const result = await compounds.deleteOne({ compoundId: req.params.id });  // Use compoundId instead of _id
+
+    const result = await compounds.deleteOne({
+      compoundId: req.params.id
+    });
+
     if (result.deletedCount === 0) {
-      return res.status(404).json({ error: 'No compound found to delete' });
+      return res.status(404).json({
+        message: 'Compound not found'
+      });
     }
-    res.json(result);
+
+    res.status(200).json({
+      message: 'Compound deleted successfully',
+      deletedCompoundId: req.params.id
+    });
+
   } catch (error) {
-    res.status(500).json({ error: 'Delete failed' });
+
+    console.error('Error deleting compound:', error);
+
+    res.status(500).json({
+      message: 'Internal Server Error'
+    });
+
   }
 });
 
-app.put('/compound/:id', async (req, res) => {
+app.put('/compounds/:id', async (req, res) => {
   try {
     const updatedCompound = req.body;
-    const result = await compounds.updateOne({ compoundId: req.params.id }, { $set: updatedCompound });  // Use compoundId instead of _id
+
+    const result = await compounds.updateOne(
+      { compoundId: req.params.id },
+      { $set: updatedCompound }
+    );
+
     if (result.matchedCount === 0) {
-      return res.status(404).json({ error: 'Compound not found' });
+      return res.status(404).json({
+        message: 'Compound not found'
+      });
     }
-    res.json(result);
+
+    const compound = await compounds.findOne({
+      compoundId: req.params.id
+    });
+
+    res.status(200).json({
+      message: 'Compound updated successfully',
+      data: compound
+    });
+
   } catch (error) {
     console.error('Error updating compound:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+
+    res.status(500).json({
+      message: 'Internal Server Error'
+    });
   }
 });
 
