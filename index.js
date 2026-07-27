@@ -151,7 +151,7 @@ app.post('/compounds', async (req, res) => {
     const requiredFields = [
       'compoundId', 'name', 'category', 'anabolicRatio', 'androgenicRatio',
       'toxicityLevel', 'mechanismOfAction', 'halfLife', 'administrationRoute',
-      'chemicalStructure', 'biomarkers', 'sideEffects', 'studyIds'
+       'biomarkers', 'sideEffects', 'studyIds'
     ];
     
     // Check for missing fields
@@ -160,6 +160,72 @@ app.post('/compounds', async (req, res) => {
       return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
     }
     
+    // Validate data types
+    if (typeof newCompound.compoundId !== "string") {
+      return res.status(400).json({
+        message: "Compound ID must be a string."
+      });
+    }
+    if (typeof newCompound.name !== "string") {
+      return res.status(400).json({
+        message: "Name must be a string."
+    });
+    }
+
+   if (typeof newCompound.anabolicRatio !== "number") {
+    return res.status(400).json({
+        message: "Anabolic ratio must be a number."
+    });
+    }
+
+    if (typeof newCompound.androgenicRatio !== "number") {
+      return res.status(400).json({
+        message: "Androgenic ratio must be a number."
+      });
+    }
+
+    if (typeof newCompound.toxicityLevel !== "number") {
+      return res.status(400).json({
+        message: "Toxicity level must be a number."
+      });
+    }
+
+    if (typeof newCompound.halfLife !== "number") {
+      return res.status(400).json({
+        message: "Half-life must be a number."
+      });
+    }
+
+    if (typeof newCompound.mechanismOfAction !== "string") {
+      return res.status(400).json({
+        message: "Mechanism of action must be a string."
+      });
+    }
+
+    if (typeof newCompound.administrationRoute !== "string") {
+      return res.status(400).json({
+        message: "Administration route must be a string."
+      });
+    }
+
+    if (!Array.isArray(newCompound.biomarkers)) {
+      return res.status(400).json({
+        message: "Biomarkers must be an array."
+      });
+    } 
+
+    if (!Array.isArray(newCompound.sideEffects)) {
+      return res.status(400).json({
+        message: "Side effects must be an array."
+      });
+    }
+
+    if (!Array.isArray(newCompound.studyIds)) {
+      return res.status(400).json({
+        message: "Study IDs must be an array."
+      });
+    }
+
     // Check if compound already exists
     const existingCompound = await compounds.findOne({ compoundId: newCompound.compoundId });
     if (existingCompound) {
@@ -200,6 +266,8 @@ app.put('/compound/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
 
 
 // Start the server
