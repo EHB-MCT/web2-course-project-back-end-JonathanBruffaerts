@@ -48,14 +48,91 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/compounds', async (req, res) => {
-  try {
-    const allCompounds = await compounds.find({}).toArray();
-    res.json(allCompounds);
-  } catch (error) {
-    console.error('Error fetching compounds:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.get("/compounds", async (req, res) => {
+    try {
+
+        const filter = {};
+
+        if (req.query.search) {
+            filter.name = {
+                $regex: req.query.search,
+                $options: "i"
+            };
+        }
+
+        if (req.query.category) {
+            filter.category = req.query.category;
+        }
+
+        let sort = {};
+
+        switch (req.query.sort) {
+
+            case "name":
+                sort = { name: 1 };
+                break;
+
+            case "toxicity":
+                sort = { toxicityLevel: 1 };
+                break;
+
+            case "anabolic":
+                sort = { anabolicRatio: -1 };
+                break;
+
+            case "androgenic":
+                sort = { androgenicRatio: -1 };
+                break;
+
+            default:
+                sort = { name: 1 };
+        }
+
+        const results = await compounds
+            .find(filter)
+            .sort(sort)
+            .toArray();
+
+        res.status(200).json({
+            message: "Compounds retrieved successfully",
+            count: results.length,
+            data: results
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to retrieve compounds"
+        });
+
+    }
+});
+
+app.get('/compounds/:id', async (req, res) => {
+    try {
+        const compound = await compounds.findOne({
+            compoundId: req.params.id
+        });
+
+        if (!compound) {
+            return res.status(404).json({
+                message: "Compound not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Compound retrieved successfully",
+            data: compound
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Internal server error"
+        });
+    }
 });
 
 app.post('/compounds', async (req, res) => {
@@ -124,19 +201,6 @@ app.put('/compound/:id', async (req, res) => {
   }
 });
 
-app.get('/compound', async (req, res) => {
-  try {
-    const query = { compoundId: req.query.id };
-    const compound = await compounds.findOne(query);
-    
-    if (!compound) {
-      return res.status(404).json({ error: 'Compound not found' });
-    }
-    res.json(compound);
-  } catch (error) {
-    res.status(400).json({ error: 'Invalid ID format' });
-  }
-});
 
 // Start the server
 app.listen(port, () => {
