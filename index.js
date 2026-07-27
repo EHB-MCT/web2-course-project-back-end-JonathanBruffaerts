@@ -267,7 +267,25 @@ app.put('/compound/:id', async (req, res) => {
   }
 });
 
+app.get("/categories", async (req, res) => {
 
+    try {
+
+        const categories = await compounds.distinct("category");
+
+        res.status(200).json({
+            data: categories
+        });
+
+    } catch {
+
+        res.status(500).json({
+            message: "Failed to retrieve categories"
+        });
+
+    }
+
+});
 
 
 // Start the server
