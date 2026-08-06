@@ -290,23 +290,26 @@ app.put('/compounds/:id', async (req, res) => {
 });
 
 app.get("/categories", async (req, res) => {
-
     try {
+        const categories = await compounds.aggregate([
+            { $unwind: "$category" },
+            { $group: { _id: "$category" } },
+            { $sort: { _id: 1 } }
+        ]).toArray();
 
-        const categories = await compounds.distinct("category");
+        // Extract the category string names from the aggregated documents
+        const categoryList = categories.map(item => item._id);
 
         res.status(200).json({
-            data: categories
+            data: categoryList
         });
 
-    } catch {
-
+    } catch (error) {
+        console.error("Categories error:", error);
         res.status(500).json({
             message: "Failed to retrieve categories"
         });
-
     }
-
 });
 
 
