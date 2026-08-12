@@ -313,6 +313,50 @@ app.get("/categories", async (req, res) => {
 });
 
 
+
+app.get('/api/pubmed/search', async (req, res) => {
+  try {
+    const query = req.query.q;
+    // Default to '*' which tells Europe PMC to start at page 1
+    const cursor = req.query.cursorMark || '*'; 
+    
+    if (!query) {
+      return res.status(400).json({ message: "Search query is required" });
+    }
+
+    // Pass the cursorMark into the Europe PMC API
+    const url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${encodeURIComponent(query)}&format=json&resultType=core&cursorMark=${encodeURIComponent(cursor)}`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (!data.resultList || data.resultList.result.length === 0) {
+      return res.status(200).json({ data: [], nextCursorMark: null, hitCount: 0 });
+    }
+
+    const studies = data.resultList.result.map(study => ({
+      id: study.pmid || study.id,
+      title: study.title,
+      journal: study.journalTitle || 'Unknown Journal',
+      pubDate: study.firstPublicationDate || study.pubYear || 'Unknown Date',
+      authors: study.authorString || 'Unknown Authors',
+      abstract: study.abstractText || null,
+      link: study.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${study.pmid}/` : `https://europepmc.org/article/MED/${study.id}`
+    }));
+
+    // Send back the data, the next page cursor, and total hits
+    res.status(200).json({ 
+      data: studies, 
+      nextCursorMark: data.nextCursorMark,
+      hitCount: data.hitCount 
+    });
+
+  } catch (error) {
+    console.error('Literature API Error:', error);
+    res.status(500).json({ message: "Failed to fetch from literature database" });
+  }
+});  
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
