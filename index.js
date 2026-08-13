@@ -140,9 +140,13 @@ const authenticateAdmin = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Extracts token from "Bearer <token>"
 
-  // Compare the provided token to your environment variable
-  if (token === process.env.ADMIN_TOKEN) {
-    next(); // Passwords match, allow the request to proceed!
+  console.log("--- AUTH CHECK ---");
+  console.log("Header received:", authHeader);
+  console.log("Expected token:", process.env.ADMIN_TOKEN);
+
+  
+  if (token && process.env.ADMIN_TOKEN && token.trim() === process.env.ADMIN_TOKEN.trim()) {
+    next(); 
   } else {
     res.status(401).json({ message: 'Unauthorized. Invalid or missing token.' });
   }
@@ -152,9 +156,8 @@ const authenticateAdmin = (req, res, next) => {
 app.post('/api/login', (req, res) => {
   const { password } = req.body;
   
-  if (password === process.env.ADMIN_PASSWORD) {
-    // If the password is correct, send the secret token to the frontend
-    res.status(200).json({ token: process.env.ADMIN_TOKEN });
+  if (password.trim() === process.env.ADMIN_PASSWORD.trim()) {
+    res.status(200).json({ token: process.env.ADMIN_TOKEN.trim() });
   } else {
     res.status(401).json({ message: 'Invalid password' });
   }
