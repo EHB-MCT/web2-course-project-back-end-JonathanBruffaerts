@@ -8,6 +8,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
@@ -139,11 +140,6 @@ app.get('/compounds/:id', async (req, res) => {
 const authenticateAdmin = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Extracts token from "Bearer <token>"
-
-  console.log("--- AUTH CHECK ---");
-  console.log("Header received:", authHeader);
-  console.log("Expected token:", process.env.ADMIN_TOKEN);
-
   
   if (token && process.env.ADMIN_TOKEN && token.trim() === process.env.ADMIN_TOKEN.trim()) {
     next(); 
@@ -153,13 +149,26 @@ const authenticateAdmin = (req, res, next) => {
 };
 
 // --- LOGIN ROUTE ---
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { password } = req.body;
   
-  if (password.trim() === process.env.ADMIN_PASSWORD.trim()) {
-    res.status(200).json({ token: process.env.ADMIN_TOKEN.trim() });
-  } else {
-    res.status(401).json({ message: 'Invalid password' });
+  // 1. Safety check: Ensure password was actually sent
+  if (!password || typeof password !== 'string') {
+    return res.status(400).json({ message: 'Password is required' });
+  }
+  
+  try {
+    // 2. Compare the plaintext password from the user against the hash in Render
+    const isMatch = await bcrypt.compare(password.trim(), process.env.ADMIN_PASSWORD_HASH);
+    
+    if (isMatch) {
+      res.status(200).json({ token: process.env.ADMIN_TOKEN.trim() });
+    } else {
+      res.status(401).json({ message: 'Invalid password' });
+    }
+  } catch (error) {
+    console.error('Bcrypt comparison error:', error);
+    res.status(500).json({ message: 'Internal server error during authentication' });
   }
 });
 
