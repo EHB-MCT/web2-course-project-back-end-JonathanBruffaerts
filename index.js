@@ -135,7 +135,32 @@ app.get('/compounds/:id', async (req, res) => {
     }
 });
 
-app.post('/compounds', async (req, res) => {
+// --- AUTHENTICATION MIDDLEWARE ---
+const authenticateAdmin = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Extracts token from "Bearer <token>"
+
+  // Compare the provided token to your environment variable
+  if (token === process.env.ADMIN_TOKEN) {
+    next(); // Passwords match, allow the request to proceed!
+  } else {
+    res.status(401).json({ message: 'Unauthorized. Invalid or missing token.' });
+  }
+};
+
+// --- LOGIN ROUTE ---
+app.post('/api/login', (req, res) => {
+  const { password } = req.body;
+  
+  if (password === process.env.ADMIN_PASSWORD) {
+    // If the password is correct, send the secret token to the frontend
+    res.status(200).json({ token: process.env.ADMIN_TOKEN });
+  } else {
+    res.status(401).json({ message: 'Invalid password' });
+  }
+});
+
+app.post('/compounds', authenticateAdmin, async (req, res) => {
   try {
     const newCompound = req.body;
 
@@ -227,7 +252,7 @@ app.post('/compounds', async (req, res) => {
   }
 });
 
-app.delete('/compounds/:id', async (req, res) => {
+app.delete('/compounds/:id', authenticateAdmin, async (req, res) => {
   try {
 
     const result = await compounds.deleteOne({
@@ -256,7 +281,7 @@ app.delete('/compounds/:id', async (req, res) => {
   }
 });
 
-app.put('/compounds/:id', async (req, res) => {
+app.put('/compounds/:id', authenticateAdmin, async (req, res) => {
   try {
     const updatedCompound = req.body;
 
@@ -361,3 +386,4 @@ app.get('/api/pubmed/search', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
