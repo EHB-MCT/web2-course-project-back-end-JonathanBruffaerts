@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
@@ -136,12 +137,28 @@ app.get('/compounds/:id', async (req, res) => {
     }
 });
 
-// --- AUTHENTICATION MIDDLEWARE ---
+// --- AUTHENTICATION MIDDLEWARE (FULLY HARDENED) ---
 const authenticateAdmin = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Extracts token from "Bearer <token>"
-  
-  if (token && process.env.ADMIN_TOKEN && token.trim() === process.env.ADMIN_TOKEN.trim()) {
+  const token = authHeader && authHeader.split(' ')[1]; 
+  const expectedToken = process.env.ADMIN_TOKEN;
+
+  // 1. Fail early if either token is completely missing
+  if (!token || !expectedToken) {
+    return res.status(401).json({ message: 'Unauthorized. Invalid or missing token.' });
+  }
+
+  // 2. Clean inputs and convert to binary Buffers
+  const tokenBuffer = Buffer.from(token.trim());
+  const expectedBuffer = Buffer.from(expectedToken.trim());
+
+  // 3. timingSafeEqual crashes if buffer lengths differ. 
+  if (tokenBuffer.length !== expectedBuffer.length) {
+    return res.status(401).json({ message: 'Unauthorized. Invalid or missing token.' });
+  }
+
+  // 4. Timing-Safe comparison to prevent timing attacks 
+  if (crypto.timingSafeEqual(tokenBuffer, expectedBuffer)) {
     next(); 
   } else {
     res.status(401).json({ message: 'Unauthorized. Invalid or missing token.' });
