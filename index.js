@@ -1,6 +1,10 @@
 /**
  * Source: Mike Derycke (Boardgame REST API) - https://www.youtube.com/watch?v=3Ykr6dZjXhE
  * Parts used: Implementation of Post-route logic for mongodb
+ * Source: Europe PMC REST API documentation - https://europepmc.org/RestfulWebService
+ * Parts used: Query parameter structure and response-field usage in /api/pubmed/search
+ * Source: bcrypt documentation - https://www.npmjs.com/package/bcrypt
+ * Parts used: Password hash verification with bcrypt.compare in /api/login
  */
 
 
@@ -175,6 +179,7 @@ app.post('/api/login', async (req, res) => {
   }
   
   try {
+    // Source attribution: this password-hash verification uses bcrypt's documented compare API.
     // 2. Compare the plaintext password from the user against the hash in Render
     const isMatch = await bcrypt.compare(password.trim(), process.env.ADMIN_PASSWORD_HASH);
     
@@ -371,6 +376,7 @@ app.get("/categories", async (req, res) => {
 app.get('/api/pubmed/search', async (req, res) => {
   try {
     const query = req.query.q;
+    // Source attribution: the cursor-based pagination and query shape follow the Europe PMC REST API docs.
     // Default to '*' which tells Europe PMC to start at page 1
     const cursor = req.query.cursorMark || '*'; 
     
@@ -378,6 +384,7 @@ app.get('/api/pubmed/search', async (req, res) => {
       return res.status(400).json({ message: "Search query is required" });
     }
 
+    // Source attribution: the Europe PMC endpoint, format, resultType, and cursorMark parameters are based on the documented API contract.
     // Pass the cursorMark into the Europe PMC API
     const url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${encodeURIComponent(query)}&format=json&resultType=core&cursorMark=${encodeURIComponent(cursor)}`;
     
@@ -388,6 +395,7 @@ app.get('/api/pubmed/search', async (req, res) => {
       return res.status(200).json({ data: [], nextCursorMark: null, hitCount: 0 });
     }
 
+    // Source attribution: these mapped fields come from Europe PMC's documented response payload.
     const studies = data.resultList.result.map(study => ({
       id: study.pmid || study.id,
       title: study.title,
